@@ -14,10 +14,10 @@ You can use this in a standalone project (basic cordova project), or into a exis
 ## Installation
     
 ```bash
-cordova plugin add cordova-plugin-nativeview --save
+cordova plugin add https://github.com/krishnaclouds/cordova-plugin-nativeview.git --save
 
 # using IONIC
-ionic cordova plugin add cordova-plugin-nativeview --save
+ionic cordova plugin add https://github.com/krishnaclouds/cordova-plugin-nativeview.git --save
 ```
 
 ### Extra: Native app (_Android/IOS_ native code)
@@ -171,7 +171,3 @@ Replace `document.addEventListener` event to `this.platform.ready().then(...)` s
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## TODO
-
-- Better catch IOS exception from JS
