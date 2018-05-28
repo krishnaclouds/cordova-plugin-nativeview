@@ -1,8 +1,7 @@
 //
 //  CDVNativeView.h
-//  IRPF
 //
-//  Created by Michel Felipe on 05/09/17.
+//  Created by Bala Krishna
 //
 //
 
@@ -11,5 +10,6 @@
 @interface CDVNativeView : CDVPlugin
 
 - (void)show:(CDVInvokedUrlCommand*)command;
+- (NSString *)getExtraMessageFromPlugin;
 
 @end

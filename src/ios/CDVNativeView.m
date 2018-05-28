@@ -1,14 +1,15 @@
 //
 //  CDVNativeView.m
-//  IRPF
 //
-//  Created by Michel Felipe on 05/09/17.
+//  Created by Bala Krishna
 //
 //
 
 #import "CDVNativeView.h"
 #import "InstantiateViewControllerError.h"
 #import <UIKit/UIKit.h>
+
+static NSString *extraMessageFromPlugin;
 
 @interface CDVNativeView (hidden)
 
@@ -25,6 +26,7 @@
     
     NSString* className = [command argumentAtIndex: 0];
     NSString* storyboardName = @"";
+    extraMessageFromPlugin = [command.arguments objectAtIndex:2];
     
     UIViewController *viewController = nil;
     
@@ -40,6 +42,8 @@
     }
     
     if ([self.viewController navigationController] != nil) {
+        
+        NSLog(@"- viewController navigationController is not nil");
         
         if ([self.viewController.navigationController.viewControllers count] > 1) {
             [self.viewController.navigationController popViewControllerAnimated: YES];
@@ -67,7 +71,7 @@
             }
         
         CDVAppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
-        appDelegate.window.rootViewController = viewController;
+        [appDelegate.window.rootViewController presentViewController:viewController animated:NO completion:nil];
         
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }else{
@@ -106,6 +110,10 @@
     
     NSString* message = [[NSString alloc] initWithFormat:@"The UIViewController name is required when the project don't have a navigationController. Please, pass a className by param in JS, like this: 'NativeView.show('MyUIViewController')"];
     @throw [[InstantiateViewControllerError alloc] initWithName: @"nameNotDefined" reason: message userInfo: nil];
+}
+
+- (NSString *) getExtraMessageFromPlugin {
+    return extraMessageFromPlugin;
 }
 
 @end
